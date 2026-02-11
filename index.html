@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestra Historia 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#ffd6e0,#cdb4db);
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.scene{
+    position:relative;
+    width:100%;
+    max-width:900px;
+    height:100vh;
+}
+
+.cat-heart{
+    position:absolute;
+    font-size:18px;
+    animation:floatUp 1.2s ease forwards;
+    pointer-events:none;
+}
+
+@keyframes floatUp{
+    0%{ transform:translateY(0) scale(.5); opacity:1; }
+    100%{ transform:translateY(-40px) scale(1.2); opacity:0; }
+}
+
+
+/* 🟢 SUELOS */
+.ground{
+    position:absolute;
+    bottom:0;
+    width:42%;
+    height:140px;
+    background:#7ed957;
+    border-top-left-radius:40px;
+    border-top-right-radius:40px;
+    z-index:1;
+}
+
+.ground.left{ left:-5%; }
+.ground.right{ right:-5%; }
+
+/* 🌉 PUENTE */
+.bridge{
+    position:absolute;
+    bottom:105px;
+    left:50%;
+    transform:translateX(-50%);
+    width:260px;
+    height:35px;
+    background:#c69c6d;
+    border-radius:20px;
+    box-shadow:0 6px 0 #a67c52;
+    z-index:2;
+}
+
+#loveBtn{
+    position:absolute;
+    top:22%;
+    left:40%;
+    transform:translateX(-50%);
+    z-index: 10;
+    padding:12px 25px;
+    border:none;
+    border-radius:20px;
+    background:#ff4d6d;
+    color:white;
+    font-size:1rem;
+    cursor:pointer;
+    box-shadow:0 6px 15px rgba(0,0,0,.2);
+    animation: breathe 2.8s ease-in-out infinite;
+}
+
+
+@keyframes breathe {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+    100% { transform: scale(1); }
+}
+
+
+.cat{
+    animation: breathe 3s ease-in-out infinite;
+    position:absolute;
+    bottom:140px;
+    width:180px;
+    transition:all 2s ease-in-out;
+    z-index:3;
+}
+
+#catWhite{ left:10%; }
+#catBrown{ right:10%; }
+
+#catWhite { transform: scaleX(1); }
+#catBrown { transform: scaleX(-1); }
+
+
+.together #catWhite{ left:35%; }
+.together #catBrown{ right:35%; }
+
+
+@keyframes jump{
+    0%{ transform:translateY(0) scaleX(var(--flip)); }
+    50%{ transform:translateY(-25px) scaleX(var(--flip)); }
+    100%{ transform:translateY(0) scaleX(var(--flip)); }
+}
+
+#catWhite{ --flip:1; }
+#catBrown{ --flip:-1; }
+
+/* 💬 MENSAJES */
+.message{
+    position:absolute;
+    top:12%;
+    width:100%;
+    text-align:center;
+    font-family:'Playfair Display',serif;
+    font-size:2rem;
+    color:#c9184a;
+    opacity:0;
+    transition:opacity 1.5s ease;
+    z-index:4;
+}
+
+.message.show{ opacity:1; }
+
+/* 💖 CORAZONES CAYENDO */
+.hearts span{
+    position:absolute;
+    top:-20px;
+    font-size:22px;
+    animation:fall linear infinite;
+    opacity:.7;
+}
+
+@keyframes fall{
+    to{ transform:translateY(110vh); }
+}
+
+/* 🌳 ÁRBOLES */
+.trees{
+    position:absolute;
+    bottom:60px;
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    font-size:40px;
+    opacity:.6;
+    z-index:2;
+}
+
+.special-message{
+    color:#7b2cbf;
+    font-size:2.1rem;
+    text-shadow:
+        0 0 6px rgba(123,44,191,.5),
+        0 0 18px rgba(123,44,191,.35);
+    animation: pop 0.4s ease, breathe 2.5s ease-in-out infinite;
+}
+
+
+@keyframes pop{
+    0%{ transform:scale(.8); opacity:0; }
+    100%{ transform:scale(1); opacity:1; }
+}
+
+/* ⏳ RELOJ */
+.clock{
+    position:absolute;
+    bottom:10px;
+    width:100%;
+    text-align:center;
+    background:rgba(0,0,0,.15);
+    color:white;
+    padding:12px;
+    border-radius:20px;
+    backdrop-filter:blur(6px);
+    font-size:.9rem;
+    z-index:4;
+}
+
+/* 💥 CORAZONES EXPLOTANDO */
+.heart{
+    position:absolute;
+    width:18px;
+    height:18px;
+    background:red;
+    transform:rotate(45deg);
+    opacity:0;
+    animation:explode 3s linear infinite;
+    z-index:2;
+}
+
+.heart::before,
+.heart::after{
+    content:"";
+    position:absolute;
+    width:18px;
+    height:18px;
+    background:red;
+    border-radius:50%;
+}
+
+.heart::before{ top:-9px; left:0; }
+.heart::after{ left:-9px; top:0; }
+
+@keyframes explode{
+    0%{
+        transform:translate(0,0) rotate(45deg) scale(.3);
+        opacity:1;
+    }
+    100%{
+        transform:translate(var(--x),var(--y)) rotate(45deg) scale(1.4);
+        opacity:0;
+    }
+}
+
+@media(max-width:600px){
+    .cat{ width:130px; }
+    .message{ font-size:1.4rem; }
+}
+</style>
+</head>
+
+<body>
+<div class="scene" id="scene">
+
+    <button id="loveBtn">Tócame 💕</button>
+
+    <!-- 🟢 Suelos -->
+    <div class="ground left"></div>
+    <div class="ground right"></div>
+
+    <!-- 🌉 Puente -->
+    <div class="bridge"></div>
+
+    <div class="message" id="message">Aunque estamos lejitos… 💕</div>
+
+    <img src="cat_white.png" class="cat" id="catWhite">
+    <img src="cat_brown.png" class="cat" id="catBrown">
+
+    <div class="hearts" id="hearts"></div>
+
+    <div class="trees">
+        <span>🌳</span>
+        <span>🌲</span>
+        <span>🌳</span>
+    </div>
+
+    <div class="clock" id="clock"></div>
+
+<audio id="music" loop>
+    <source src="humbe.mp3" type="audio/mpeg">
+</audio>
+
+</div>
+
+
+
+
+<script>
+const START_DATE = new Date('2025-09-06T00:24:00');
+
+const messageEl = document.getElementById('message');
+const scene = document.getElementById('scene');
+
+const catWhite = document.getElementById('catWhite');
+const catBrown = document.getElementById('catBrown');
+
+
+const messages = [
+    "Aunque estamos lejitos… 💕",
+    "Siempre encontramos la forma de estar juntos 🥹",
+    "Cada día contigo es mi lugar favorito ✨",
+    "Y esta historia… apenas comienza 💖"
+];
+
+let index = 0;
+
+function showMessage(){
+    messageEl.classList.remove('show');
+
+    setTimeout(()=>{
+        messageEl.innerText = messages[index];
+        messageEl.classList.add('show');
+        index = (index + 1) % messages.length;
+    },400);
+}
+
+let messageLoop = setInterval(showMessage,3500);
+
+messageEl.classList.add('show');
+
+setTimeout(()=>{
+    scene.classList.add('together');
+},4000);
+
+/* 💖 Corazones cayendo */
+function createHearts(){
+    const container = document.getElementById('hearts');
+
+    for(let i=0;i<25;i++){
+        const span = document.createElement('span');
+        span.innerText = '💖';
+        span.style.left = Math.random()*100 + 'vw';
+        span.style.animationDuration = (4+Math.random()*4)+'s';
+        span.style.animationDelay = Math.random()*5+'s';
+        container.appendChild(span);
+    }
+}
+createHearts();
+
+/* 💥 Corazones explotando */
+function explodeHearts(){
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+
+    heart.style.left = '50%';
+    heart.style.top = '55%';
+
+    const x = (Math.random() - 0.5) * 600;
+    const y = (Math.random() - 0.5) * 600;
+
+    heart.style.setProperty('--x', `${x}px`);
+    heart.style.setProperty('--y', `${y}px`);
+
+    scene.appendChild(heart);
+
+    setTimeout(()=>heart.remove(),3000);
+}
+setInterval(explodeHearts,180);
+
+function catLoveExplosion(cat){
+    for(let i=0;i<6;i++){
+        const heart = document.createElement("div");
+        heart.className = "cat-heart";
+        heart.innerText = "💖";
+
+        heart.style.left = (cat.offsetLeft + cat.offsetWidth/2 - 10 + (Math.random()*30-15)) + "px";
+        heart.style.top = (cat.offsetTop + 20) + "px";
+
+        scene.appendChild(heart);
+
+        setTimeout(()=>heart.remove(),1200);
+    }
+}
+
+
+
+
+document.getElementById("loveBtn").onclick = () => {
+
+    const music = document.getElementById("music");
+
+    music.play();
+
+    clearInterval(messageLoop);
+
+    /* 🐾 SALTO DE GATITOS */
+    catWhite.style.animation = "jump 0.6s ease";
+    catBrown.style.animation = "jump 0.6s ease";
+
+    catLoveExplosion(catWhite);
+    catLoveExplosion(catBrown);
+
+    setTimeout(()=>{
+        catWhite.style.animation = "breathe 3s ease-in-out infinite";
+        catBrown.style.animation = "breathe 3s ease-in-out infinite";
+    },600);
+
+    messageEl.classList.add("special-message");
+
+    messageEl.innerText =
+        "Te amo más de lo que las palabras pueden explicar 🥹💖";
+
+    setTimeout(()=>{
+
+        messageEl.classList.remove("special-message");
+
+        showMessage();
+
+        messageLoop = setInterval(showMessage,3500);
+
+    },4000);
+};
+
+
+
+
+setTimeout(() => {
+    messageEl.innerText = "Y esto es solo el comienzo de todo lo que viviremos juntos 💖";
+}, 9000);
+
+
+
+
+/* ⏳ Reloj */
+function updateClock(){
+    const now = new Date();
+    const diff = now - START_DATE;
+
+    const seconds = Math.floor(diff/1000)%60;
+    const minutes = Math.floor(diff/1000/60)%60;
+    const hours = Math.floor(diff/1000/60/60)%24;
+    const days = Math.floor(diff/1000/60/60/24);
+    const months = Math.floor(days/30);
+    const years = Math.floor(months/12);
+
+    document.getElementById('clock').innerHTML = `
+        Hoy es: ${now.toLocaleDateString()} ${now.toLocaleTimeString()} 💫<br>
+        Llevamos juntos: ${years} años, ${months%12} meses, ${days%30} días 💕<br>
+        ${hours}h ${minutes}m ${seconds}s
+    `;
+}
+
+
+
+updateClock();
+setInterval(updateClock,1000);
+</script>
+</body>
+</html>
